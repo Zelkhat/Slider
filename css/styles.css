@@ -1,0 +1,36 @@
+html, body, ul, li{
+    margin: 0;
+    padding: 0;
+}
+
+.gallery {
+	width: 500px;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 20px;
+}
+
+.gallery .photos {
+	position: relative;
+	height: 375px;
+}
+
+.gallery .photos img {
+	width: 100%;
+	position: absolute;
+	left: 0;
+	opacity: 0;
+	transition: opacity 2s;
+}
+
+.gallery .photos img.showed {
+	opacity: 1;
+}
+
+.gallery .buttons {
+	margin: 10px;
+}
+
+.gallery2 > .buttons {
+	/*display: none;*/
+}
