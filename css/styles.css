@@ -32,5 +32,5 @@ html, body, ul, li{
 }
 
 .gallery2 > .buttons {
-	/*display: none;*/
+	display: none;
 }

@@ -18,8 +18,6 @@ window.onload = function() {
 
 function Slider(obj) {
 	
-	console.log(this);
-
 	var images = document.querySelectorAll(obj.images);
 	var auto = obj.auto;
 	var rate = obj.rate || 1000;
