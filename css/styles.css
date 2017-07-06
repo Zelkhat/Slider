@@ -16,15 +16,14 @@ html, body, ul, li{
 }
 
 .gallery .photos img {
-	width: 100%;
 	position: absolute;
 	left: 0;
-	opacity: 0;
-	transition: opacity 2s;
+	top: 0;
+	width: 0;
 }
 
 .gallery .photos img.showed {
-	opacity: 1;
+	width: 100%;
 }
 
 .gallery .buttons {
@@ -34,3 +33,15 @@ html, body, ul, li{
 .gallery2 > .buttons {
 	display: none;
 }
+
+/*.gallery .photos img {
+	width: 100%;
+	position: absolute;
+	left: 0;
+	opacity: 0;
+	transition: opacity 2s;
+}
+
+.gallery .photos img.showed {
+	opacity: 1;
+}*/

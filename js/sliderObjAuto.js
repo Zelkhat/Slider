@@ -31,9 +31,25 @@ function Slider(obj) {
 	var slider = this;
 	var i = 0;
 
+	var isRun = false;
+
 	this.move = function(dir) {
-		
-		slider.images.eq(i).removeClass('showed');
+
+		// protect from multiple clicks
+		if (isRun) {
+			return
+		}
+		isRun = true;
+
+		// hide image
+		slider.images.eq(i).css({
+			"left": 0,
+			"top": 0,
+			"right": "auto",
+			"bottom": "auto"
+		}).animate({
+			width: 0
+		}, 1000);
 
 		i += dir; // i = i + 1*dir
 		if (i < 0) {
@@ -43,8 +59,18 @@ function Slider(obj) {
 		} else {
 
 		};
-		slider.images.eq(i).addClass('showed');
-
+		// show image
+		slider.images.eq(i).css({
+			"left": "auto",
+			"top": "auto",
+			"right": 0,
+			"bottom": 0
+		}).animate({
+			width: '100%'
+		}, 1000, function() {
+			isRun = false; // callback
+		});
+		
 	}
 
 	$(slider.btnPrev).on('click', function(){
