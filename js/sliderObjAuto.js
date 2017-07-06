@@ -13,7 +13,8 @@ $(function() {
 		btnPrev: '.gallery2 .buttons .prev',
 		btnNext: '.gallery2 .buttons .next',
 		auto: true,
-		rate: 2000
+		rate: 2000,
+		direction: -1
 	});
 
 });
@@ -25,27 +26,37 @@ function Slider(obj) {
 	this.btnPrev = obj.btnPrev;
 	this.btnNext = obj.btnNext;
 	this.rate = obj.rate || 1000;
+	this.direction = obj.direction || 1;
 
 	var slider = this;
 	var i = 0;
 
-	this.prev = function() {
+	this.move = function(dir) {
+		
 		slider.images.eq(i).removeClass('showed');
-		i --;
-		if(i < 0) i = slider.images.length - 1;
+
+		i += dir; // i = i + 1*dir
+		if (i < 0) {
+			i = slider.images.length - 1;
+		} else if (i >= slider.images.length) {
+			i = 0;
+		} else {
+
+		};
 		slider.images.eq(i).addClass('showed');
-	}
-	this.next = function() {
-		slider.images.eq(i).removeClass('showed');
-		i ++;
-		if(i >= slider.images.length) i = 0;
-		slider.images.eq(i).addClass('showed');
+
 	}
 
-	$(slider.btnPrev).on('click', slider.prev);
-	$(slider.btnNext).on('click', slider.next);
+	$(slider.btnPrev).on('click', function(){
+		slider.move(-1);
+	});
+	$(slider.btnNext).on('click', function() {
+		slider.move(1);
+	});
 	
 	if (slider.auto) {
-		setInterval(slider.next, slider.rate);
+		setInterval(function() {
+			slider.move(slider.direction);
+		}, slider.rate);
 	}	
 }
