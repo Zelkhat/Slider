@@ -1,4 +1,5 @@
-window.onload = function() {
+//window.onload = function() {
+$(function() {
 
 	var slider1 = new Slider({
 		images: '.gallery1 img',
@@ -14,32 +15,37 @@ window.onload = function() {
 		auto: true,
 		rate: 2000
 	});
-}
+
+});
 
 function Slider(obj) {
 	
-	var images = document.querySelectorAll(obj.images);
-	var auto = obj.auto;
-	var rate = obj.rate || 1000;
+	this.images = $(obj.images);
+	this.auto = obj.auto;
+	this.btnPrev = obj.btnPrev;
+	this.btnNext = obj.btnNext;
+	this.rate = obj.rate || 1000;
 
+	var slider = this;
 	var i = 0;
-	prev = function() {
-		images[i].classList.remove('showed');
+
+	this.prev = function() {
+		slider.images.eq(i).removeClass('showed');
 		i --;
-		if(i < 0) i = images.length - 1;
-		images[i].classList.add('showed');
+		if(i < 0) i = slider.images.length - 1;
+		slider.images.eq(i).addClass('showed');
 	}
-	next = function() {
-		images[i].classList.remove('showed');
+	this.next = function() {
+		slider.images.eq(i).removeClass('showed');
 		i ++;
-		if(i >= images.length) i = 0;
-		images[i].classList.add('showed');
+		if(i >= slider.images.length) i = 0;
+		slider.images.eq(i).addClass('showed');
 	}
 
-	document.querySelector(obj.btnPrev).onclick = prev;
-	document.querySelector(obj.btnNext).onclick = next;
-
-	if (auto) {
-		setInterval(next, rate);
+	$(slider.btnPrev).on('click', slider.prev);
+	$(slider.btnNext).on('click', slider.next);
+	
+	if (slider.auto) {
+		setInterval(slider.next, slider.rate);
 	}	
 }
